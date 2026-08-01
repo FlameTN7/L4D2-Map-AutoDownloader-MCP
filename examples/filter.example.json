@@ -1,0 +1,16 @@
+{
+  "updated_at": "2026-08-01T00:00:00",
+  "blacklist": [
+    "Jade Helm - (backrooms)"
+  ],
+  "dedup_75days": [
+    {
+      "map": "Death Town",
+      "workshop_id": "2006914715",
+      "added": "2026-08-01",
+      "expires": "2026-10-15",
+      "status": "active",
+      "source": "downloaded"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "workshop_dir": "/home/flametn7/server/game/l4d2/left4dead2/addons/workshop",
+  "idle_dir": "/home/flametn7/server/game/l4d2/left4dead2/addons/workshop/闲置地图放这里",
+  "filter_json_path": "/home/flametn7/server/game/l4d2/l4d2_map_filter.json",
+  "steam_api_key_path": "/home/flametn7/server/game/l4d2/l4d2_steam_api.json",
+  "http_proxy": "http://127.0.0.1:10808",
+  "mirror_base": "https://zhrradiant.com/wp-json/l4d2-workshop/v1",
+  "swd_base": "https://steamworkshopdownloader.io",
+  "steam_api_base": "https://api.steampowered.com",
+  "echocn_url": "http://blog.echocn.cn:8090/",
+  "download_proxies": [
+    "https://accelerator.zhrradiantcos.top",
+    "https://la2-accelerator.zhrradiantcos.top",
+    "https://la-accelerator.zhrradiantcos.top"
+  ],
+  "curated_refresh_interval_hours": 24,
+  "request_timeout_seconds": 30,
+  "download_timeout_seconds": 600,
+  "download_max_retries": 3,
+  "dedup_days": 75,
+  "data_dir": "/home/flametn7/server/l4d2-workshop-mirror/data"
+}

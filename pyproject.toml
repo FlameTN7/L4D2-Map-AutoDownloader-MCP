@@ -1,0 +1,27 @@
+[project]
+name = "l4d2-workshop-mirror"
+version = "0.3.0"
+description = "MCP server for crawling, identifying, resolving dependencies and downloading L4D2 workshop campaign maps."
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=3.4.0",
+    "requests>=2.31",
+    "cloudscraper>=1.2.71",
+    "beautifulsoup4>=4.12",
+    "lxml>=5.0",
+    "zhconv>=0.4.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+l4d2-mcp = "server:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["server", "config"]
+packages = ["core"]
