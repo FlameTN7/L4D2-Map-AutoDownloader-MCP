@@ -67,6 +67,3 @@ cp config.example.json config.json
 - 网络：元数据查询走 HTTP 代理；vpk 下载走内置加速线路
 - 可选：Steam Web API key（死图确认、三级回退兜底，无 key 也能运行）
 
-## 版本
-
-当前版本 **v0.3**。变更历史见 `ARCHITECTURE.md §9 决策记录`。
