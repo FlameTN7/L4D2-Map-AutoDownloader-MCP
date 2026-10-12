@@ -102,14 +102,20 @@ class FilterStore:
                 "days_remaining": 0,
                 "source": entry.get("source", ""),
             }
-        added = entry.get("added")
         expires = entry.get("expires")
         days_remaining = None
         if expires:
             try:
                 exp_date = datetime.fromisoformat(expires)
+                now = datetime.now()
+                if exp_date <= now:
+                    return {
+                        "state": "dedup_expired",
+                        "days_remaining": 0,
+                        "source": entry.get("source", ""),
+                    }
                 days_remaining = max(
-                    0, (exp_date - datetime.now()).days
+                    0, (exp_date - now).days
                 )
             except (ValueError, TypeError):
                 pass
