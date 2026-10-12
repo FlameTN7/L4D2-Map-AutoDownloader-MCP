@@ -172,6 +172,7 @@ class SteamApiClient:
             self.session.proxies.update(cfg.proxies)
 
     def get_file_details(self, workshop_id: str | int) -> Optional[dict]:
+        """返回有效详情；确认不可用时返回 None，请求/响应错误向调用方抛出。"""
         key = self.cfg.steam_api_key
         if not key:
             return None
@@ -191,14 +192,23 @@ class SteamApiClient:
             r.raise_for_status()
             data = r.json()
             resp = data.get("response", {})
-            if resp.get("result") == 1:
-                files = resp.get("publishedfiledetails") or []
-                if files:
-                    # 防御：Steam 对私密/删除物品可能返回 result=1 的空壳
-                    if (files[0].get("title") or "").strip():
-                        return files[0]
+            if resp.get("result") != 1:
+                raise ValueError(f"Steam API request failed: result={resp.get('result')}")
+            files = resp.get("publishedfiledetails")
+            if not isinstance(files, list) or len(files) != 1 or not isinstance(files[0], dict):
+                raise ValueError("Steam API response missing file details")
+            item = files[0]
+            result = item.get("result")
+            if result in (9, 15):  # FileNotFound / AccessDenied
+                return None
+            if result != 1:
+                raise ValueError(f"Steam file lookup failed: result={result}")
+            # 防御：Steam 对私密/删除物品可能返回 result=1 的空壳
+            if (item.get("title") or "").strip():
+                return item
         except Exception as e:
             logger.warning(f"Steam API {workshop_id} error: {e}")
+            raise  # _confirm_dead 必须区分未能确认和已确认不可用
         return None
 
 
